@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class BookListActivity extends AppCompatActivity {
 
             @Override
             public void DataIsLoaded(List<Book> books, List<String> keys) {
+                findViewById(R.id.loading_book_pb).setVisibility(View.GONE);
                 new RecyclerView_config().setConfig(mRecyclerView, BookListActivity.this, books, keys);
             }
 

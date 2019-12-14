@@ -2,6 +2,7 @@ package com.wonder.firebaset3;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,5 +49,16 @@ public class FirebaseDatabaseHelper {
 
             }
         });
+    }
+
+    public void addBook(Book book,final DataStatus dataStatus){
+       String key = mRefarenceBooks.push().getKey();
+        mRefarenceBooks.child(key).setValue(book)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        dataStatus.DataInserted();
+                    }
+                });
     }
 }
