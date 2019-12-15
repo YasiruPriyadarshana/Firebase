@@ -29,7 +29,7 @@ public class NewBookActivity extends AppCompatActivity {
         mISBN_edittxt = (EditText)findViewById(R.id.isbn_txt);
         mBookCategory_spinner = (Spinner)findViewById(R.id.category_spin);
 
-        mAdd_btn = (Button)findViewById(R.id.add_btn);
+        mAdd_btn = (Button)findViewById(R.id.update_btn);
         mBack_btn = (Button)findViewById(R.id.back_btn);
 
         mAdd_btn.setOnClickListener(new View.OnClickListener() {
