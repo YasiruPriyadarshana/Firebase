@@ -11,13 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 public class RecyclerView_config {
+    FirebaseAuth mAuth;
+    private static FirebaseUser user;
     private Context mContext;
     private BookAdapter mBookAdapter;
 
     public  void  setConfig(RecyclerView recyclerView, Context context, List<Book> books, List<String> keys){
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         mContext=context;
         mBookAdapter = new BookAdapter(books, keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -44,14 +51,18 @@ public class RecyclerView_config {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext, BookDetailsActivity.class);
-                    intent.putExtra("key",key);
-                    intent.putExtra("author",mAuthor.getText().toString());
-                    intent.putExtra("title",mTitle.getText().toString());
-                    intent.putExtra("category",mCategory.getText().toString());
-                    intent.putExtra("isbn",mISBN.getText().toString());
+                    if (user != null){
+                        Intent intent=new Intent(mContext, BookDetailsActivity.class);
+                        intent.putExtra("key",key);
+                        intent.putExtra("author",mAuthor.getText().toString());
+                        intent.putExtra("title",mTitle.getText().toString());
+                        intent.putExtra("category",mCategory.getText().toString());
+                        intent.putExtra("isbn",mISBN.getText().toString());
 
-                    mContext.startActivity(intent);
+                        mContext.startActivity(intent);
+                    }else {
+                        mContext.startActivity(new Intent(mContext, SignInActivity.class));
+                    }
                 }
             });
         }
@@ -92,5 +103,9 @@ public class RecyclerView_config {
         }
 
 
+    }
+
+    public static void logout(){
+        user=null;
     }
 }

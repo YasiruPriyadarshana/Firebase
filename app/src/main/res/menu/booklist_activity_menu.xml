@@ -5,4 +5,10 @@
     <item
         android:id="@+id/new_book"
         android:title="Book item" />
+    <item
+        android:id="@+id/signin"
+        android:title="LOGIN/REGISTER" />
+    <item
+        android:id="@+id/signout"
+        android:title="LOGOUT" />
 </menu>
